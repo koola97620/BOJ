@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
+	
+	// 매 행마다 최소값을 골라 기존 최소값에 더하는 방식으로는 구할 수 없다.
 
 	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -31,45 +33,38 @@ public class Main {
 			}
 			
 		}
+		
+		// 여기까지가 입력세팅.
 
+		int r; 
+		int g;
+		int b;
+		int result[][] = new int[3][input];
+		result[0][0] = nums[0][0];
+		result[1][0] = nums[0][1];
+		result[2][0] = nums[0][2];
 		
-		int min=Integer.MAX_VALUE;
-		int result=0;
-		int color=0;
-		
-		for(int i =0 ; i < 3 ; i++) {
-			if(nums[0][i] < min) {
-				min = nums[0][i];
-				color = i;
-			}
-		}
-		result += min;
-		
-		// i=0 첫번재 줄은 위에서 실행함.
 		for(int i=1 ; i < input ; i++) {
-			min=Integer.MAX_VALUE;//초기화.
+			r = nums[i][0];
+			g = nums[i][1];
+			b = nums[i][2];
 			
-			for(int k=0 ; k < 3 ; k++) {
-				if(color ==k) {
-					continue;
-				}else {
-					if(nums[i][k] < min) {
-						min = nums[i][k];
-						color=k;
-					}
-				}
-				
-				
-			}
+			// R = 0  G = 1  B = 2
+			result[0][i] = r + Math.min(result[1][i-1], result[2][i-1]);
+			result[1][i] = g + Math.min(result[0][i-1], result[2][i-1]);
+			result[2][i] = b + Math.min(result[0][i-1], result[1][i-1]);
 			
-			
-			result += min;
 		}
-		System.out.println(result);
+	
+		int min = Math.min(Math.min(result[0][input-1], result[1][input-1]), result[2][input-1]);
+		System.out.println(min);
 		
 		
 		
 
 	}
+	
+	
+	
 
 }
