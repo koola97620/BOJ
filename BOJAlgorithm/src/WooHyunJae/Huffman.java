@@ -528,9 +528,22 @@ class NoValidLetterException extends Exception {
          Tree tree = new Tree( s );  
          Code c = new Code( tree );  
          for ( int a =0; a < tree.nodeObject.length; a++ ) {  
-            System.out.println( "   " + tree.nodeObject[ a ].data.getLetter() + "------" + tree.nodeObject[ a ].data.stringCode ); 
+            System.out.println( "   " + tree.nodeObject[ a ].data.getLetter() + "------" + tree.nodeObject[ a ].data.stringCode );
             System.out.println("");
-         }  
+         }
+        
+         char ch[] = s.toCharArray();
+         StringBuffer charBuffer = new StringBuffer();
+         
+         for(int a=0; a < s.length() ; a++) {
+        	 for(int b = 0 ; b < tree.nodeObject.length ; b++) {
+        		 if(ch[a] == tree.nodeObject[b].data.getLetter()) {
+        			 charBuffer = charBuffer.append(tree.nodeObject[b].data.stringCode);
+        		 }
+        	 }
+         }
+         
+         System.out.println(s + "  =  " + charBuffer);
   
          int result = JOptionPane.showConfirmDialog( (Component)null, "다시하시겠습니까?", "Choose", JOptionPane.YES_NO_OPTION );  
          if ( result == JOptionPane.YES_OPTION ) {  
