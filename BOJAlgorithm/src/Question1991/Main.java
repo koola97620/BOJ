@@ -81,6 +81,7 @@ public class Main {
             String line = br.readLine();
             String[] strs = line.split(" ");
 
+            // 첫번째 Line 세팅.
             if(i==0) {
                 Node n1 = new Node(strs[0]);
                 Node n2 = new Node(strs[1]);
